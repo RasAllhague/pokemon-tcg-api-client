@@ -84,7 +84,7 @@ fn build_filter_query(
         if split.is_empty() {
             *builder += &urlencoding::encode(filter_key);
             *builder += ":";
-            *builder += &urlencoding::encode(&enclose_whitespace_strings(filter_value)); 
+            *builder += &urlencoding::encode(&enclose_whitespace_strings(filter_value));
         }
 
         for sub_split in &split {

@@ -13,38 +13,46 @@ pub struct PokemonQueryBuilder {
 }
 
 impl PokemonQueryBuilder {
+    #[must_use]
     pub fn with_page_size(mut self, size: u8) -> Self {
         self.page_size = Some(size);
         self
     }
 
+    #[must_use]
     pub fn with_page(mut self, page: u32) -> Self {
         self.page = Some(page);
         self
     }
 
+    #[must_use]
     pub fn add_ordering(mut self, ordering: Ordering) -> Self {
         self.order_by.push(ordering);
         self
     }
 
+    #[must_use]
     pub fn add_select(mut self, field: &str) -> Self {
         self.select_fields.push(String::from(field));
         self
     }
 
+    #[must_use]
     pub fn add_id(self, id: &CardId) -> Self {
         self.add_or_update_filter("id", &id.0)
     }
 
+    #[must_use]
     pub fn add_name(self, name: &str) -> Self {
         self.add_or_update_filter("name", name)
     }
 
+    #[must_use]
     pub fn add_sub_types(self, sub_type: &str) -> Self {
         self.add_or_update_filter("subtypes", sub_type)
     }
 
+    #[must_use]
     pub fn add_hp_range(self, low_value: &str, high_value: &str, is_inclusive: bool) -> Self {
         if is_inclusive {
             return self.add_or_update_filter("hp", &format!("[{low_value} TO {high_value}]"));
@@ -53,18 +61,22 @@ impl PokemonQueryBuilder {
         self.add_or_update_filter("hp", &format!("{{{low_value} TO {high_value}}}"))
     }
 
+    #[must_use]
     pub fn add_types(self, types: &str) -> Self {
         self.add_or_update_filter("types", types)
     }
 
+    #[must_use]
     pub fn add_evolves_from(self, evolves_from: &str) -> Self {
         self.add_or_update_filter("evolvesFrom", evolves_from)
     }
 
+    #[must_use]
     pub fn add_evolves_to(self, evolves_to: &str) -> Self {
         self.add_or_update_filter("evolvesTo", evolves_to)
     }
 
+    #[must_use]
     pub fn add_attack_cost_range(
         self,
         low_value: &str,
@@ -84,10 +96,12 @@ impl PokemonQueryBuilder {
         )
     }
 
+    #[must_use]
     pub fn add_set_name(self, set_name: &str) -> Self {
         self.add_or_update_filter("set.series", set_name)
     }
 
+    #[must_use]
     pub fn add_rarity(self, rarity: &str) -> Self {
         self.add_or_update_filter("rarity", rarity)
     }

@@ -38,9 +38,9 @@ pub struct SetId(pub String);
 
 impl PokemonApiClient {
     /// Creates a new instance of the `PokemonApiClient`.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `api_key` - The to the pokemon tcg api.
     #[must_use]
     pub fn new(api_key: &str) -> Self {
@@ -51,13 +51,13 @@ impl PokemonApiClient {
     }
 
     /// Gets results from the api based on a resource path (url).
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `resource_path` - The part of the url of the resource you want to query.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_resource<'a, T>(&self, resource_path: &str) -> Result<T, ApiError>
     where
@@ -73,19 +73,19 @@ impl PokemonApiClient {
 
         let json = res.text().await.map_err(ApiError::Reqwest)?;
         let api_response: ApiResponse<T> =
-            serde_json::from_str(&json).map_err( ApiError::Deserialize)?;
+            serde_json::from_str(&json).map_err(ApiError::Deserialize)?;
 
         Ok(api_response.data)
     }
 
     /// Gets results from the api based on a `QueryBuilder`.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `query_builder` - The query builder which creates the query parameters.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_queryable_resources<'a, T, Q>(
         &self,
@@ -114,40 +114,33 @@ impl PokemonApiClient {
     }
 
     /// Downloads a image from the api to the designated destination.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `url` - The url of the image to download from the api.
     /// * `destination` - The destination where to save the image to.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if the file cannot be downloaded or not be saved to the file system.
     pub async fn download_image(&self, url: &str, destination: &str) -> Result<(), ApiError> {
-        let response = reqwest::get(url)
-            .await
-            .map_err(ApiError::Reqwest)?;
+        let response = reqwest::get(url).await.map_err(ApiError::Reqwest)?;
 
         let mut file = File::create(destination).map_err(ApiError::Io)?;
-        let mut content = Cursor::new(
-            response
-                .bytes()
-                .await
-                .map_err(ApiError::Reqwest)?,
-        );
+        let mut content = Cursor::new(response.bytes().await.map_err(ApiError::Reqwest)?);
         std::io::copy(&mut content, &mut file).map_err(ApiError::Io)?;
 
         Ok(())
     }
 
     /// Gets a card set from the api based on its id.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `id` - The id of the set to retrieve.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_card(&self, id: CardId) -> Result<Card, ApiError> {
         let card_url = format!("{API_URL}/cards/{}", id.0);
@@ -156,9 +149,9 @@ impl PokemonApiClient {
     }
 
     /// Gets a list of all cards from the api.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_all_cards(&self) -> Result<Vec<Card>, ApiError> {
         let cards_url = format!("{API_URL}/cards");
@@ -167,13 +160,13 @@ impl PokemonApiClient {
     }
 
     /// Gets a specific set from the api based on its id.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `id` - The id of the set to retrieve.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_set(&self, id: SetId) -> Result<Set, ApiError> {
         let sets_url = format!("{API_URL}/sets/{}", id.0);
@@ -182,9 +175,9 @@ impl PokemonApiClient {
     }
 
     /// Gets a list of all sets from the api.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_all_sets(&self) -> Result<Vec<Set>, ApiError> {
         let set_url = format!("{API_URL}/sets");
@@ -193,9 +186,9 @@ impl PokemonApiClient {
     }
 
     /// Gets a list of all types from the api.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_all_types(&self) -> Result<Vec<String>, ApiError> {
         let types_url = format!("{API_URL}/types");
@@ -204,9 +197,9 @@ impl PokemonApiClient {
     }
 
     /// Gets a list of all subtypes from the api.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_all_subtype(&self) -> Result<Vec<String>, ApiError> {
         let types_url = format!("{API_URL}/subtypes");
@@ -215,9 +208,9 @@ impl PokemonApiClient {
     }
 
     /// Gets a list of all supertypes from the api.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_all_supertypes(&self) -> Result<Vec<String>, ApiError> {
         let types_url = format!("{API_URL}/supertypes");
@@ -226,9 +219,9 @@ impl PokemonApiClient {
     }
 
     /// Gets a list of all rarities from the api.
-    /// 
+    ///
     /// # Errors
-    /// 
+    ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
     pub async fn get_all_rarities(&self) -> Result<Vec<String>, ApiError> {
         let types_url = format!("{API_URL}/rarities");

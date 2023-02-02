@@ -16,7 +16,7 @@ pub struct BulbId {
 
 impl ApiResource for BulbId {
     fn url() -> String {
-        format!("{}/cards", API_URL)
+        format!("{API_URL}/cards")
     }
 }
 

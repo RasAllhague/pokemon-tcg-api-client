@@ -13,42 +13,51 @@ pub struct EnergyQueryBuilder {
 }
 
 impl EnergyQueryBuilder {
+    #[must_use]
     pub fn with_page_size(mut self, size: u8) -> Self {
         self.page_size = Some(size);
         self
     }
 
+    #[must_use]
     pub fn with_page(mut self, page: u32) -> Self {
         self.page = Some(page);
         self
     }
 
+    #[must_use]
     pub fn add_ordering(mut self, ordering: Ordering) -> Self {
         self.order_by.push(ordering);
         self
     }
 
+    #[must_use]
     pub fn add_select(mut self, field: &str) -> Self {
         self.select_fields.push(String::from(field));
         self
     }
 
+    #[must_use]
     pub fn add_id(self, id: &CardId) -> Self {
         self.add_or_update_filter("id", &id.0)
     }
 
+    #[must_use]
     pub fn add_name(self, name: &str) -> Self {
         self.add_or_update_filter("name", name)
     }
 
+    #[must_use]
     pub fn add_sub_types(self, sub_type: &str) -> Self {
         self.add_or_update_filter("subtypes", sub_type)
     }
 
+    #[must_use]
     pub fn add_set_name(self, set_name: &str) -> Self {
         self.add_or_update_filter("set.name", set_name)
     }
 
+    #[must_use]
     pub fn add_set_series(self, set_series: &str) -> Self {
         self.add_or_update_filter("ser.series", set_series)
     }
