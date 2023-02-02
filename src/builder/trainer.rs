@@ -4,7 +4,7 @@ use crate::pokemon_api_client::api_client::CardId;
 
 use super::{Ordering, QueryBuilder};
 
-pub struct EnergyQueryBuilder {
+pub struct TrainerQueryBuilder {
     filters: HashMap<String, String>,
     page: Option<u32>,
     page_size: Option<u8>,
@@ -12,7 +12,7 @@ pub struct EnergyQueryBuilder {
     select_fields: Vec<String>,
 }
 
-impl EnergyQueryBuilder {
+impl TrainerQueryBuilder {
     pub fn with_page_size(mut self, size: u8) -> Self {
         self.page_size = Some(size);
         self
@@ -41,14 +41,6 @@ impl EnergyQueryBuilder {
         self.add_or_update_filter("name", name)
     }
 
-    pub fn add_sub_types(self, sub_type: &str) -> Self {
-        self.add_or_update_filter("subtypes", sub_type)
-    }
-
-    pub fn add_set_name(self, set_name: &str) -> Self {
-        self.add_or_update_filter("set.name", set_name)
-    }
-
     pub fn add_set_series(self, set_series: &str) -> Self {
         self.add_or_update_filter("ser.series", set_series)
     }
@@ -64,9 +56,9 @@ impl EnergyQueryBuilder {
     }
 }
 
-impl QueryBuilder for EnergyQueryBuilder {
+impl QueryBuilder for TrainerQueryBuilder {
     fn new() -> Self {
-        EnergyQueryBuilder {
+        TrainerQueryBuilder {
             filters: HashMap::new(),
             page: None,
             page_size: None,

@@ -1,5 +1,7 @@
 pub mod energy;
 pub mod pokemon;
+pub mod set;
+pub mod trainer;
 
 use std::{collections::HashMap, fmt::Display};
 
