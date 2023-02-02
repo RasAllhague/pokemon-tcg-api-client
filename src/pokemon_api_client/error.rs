@@ -12,10 +12,10 @@ pub enum ApiError {
 impl fmt::Display for ApiError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ApiError::Reqwest(err) => write!(f, "Reqwest error: {}", err),
-            ApiError::Deserialize(err) => write!(f, "serde_json error: {}", err),
-            ApiError::Io(err) => write!(f, "IO error: {}", err),
-            ApiError::General(s) => write!(f, "General error: {}", s),
+            ApiError::Reqwest(err) => write!(f, "Reqwest error: {err}"),
+            ApiError::Deserialize(err) => write!(f, "serde_json error: {err}"),
+            ApiError::Io(err) => write!(f, "IO error: {err}"),
+            ApiError::General(s) => write!(f, "General error: {s}"),
         }
     }
 }
