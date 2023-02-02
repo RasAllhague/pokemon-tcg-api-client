@@ -5,19 +5,31 @@ pub mod trainer;
 
 use std::{collections::HashMap, fmt::Display};
 
+/// Container for the ordering of query fields of the results.
 #[derive(Clone)]
 pub enum Ordering {
     Ascending(String),
     Descending(String),
 }
 
+/// Trait for implementing query builders for the api client.
 pub trait QueryBuilder {
+    /// Creates a new instance of the query builder.
     fn new() -> Self;
+    /// Returns the current page the query builder is set to.
     fn page(&self) -> Option<u32>;
+    /// Returns the current page size the query builder is set to.
     fn page_size(&self) -> Option<u8>;
+    /// Returns the filters set for the query builder.
     fn filters(&self) -> HashMap<String, String>;
+    /// Returns the ordering information of the query builder.
     fn order_by(&self) -> Vec<Ordering>;
+    /// Returns the selected fields for the returning json of the query builder.
     fn select_fields(&self) -> Vec<String>;
+
+    /// Builds and returns the query url for the api request.
+    /// 
+    /// * `url` - The base url of the query url.
     fn build(&self, url: &str) -> String {
         let url = url;
         let mut query_index = url.find(|x| x == '?');
