@@ -7,6 +7,7 @@ use super::{
     set::Set,
 };
 
+/// Subresource for cards in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Card {
     pub id: String,
@@ -52,12 +53,14 @@ impl ApiResource for Card {
     }
 }
 
+/// Subresource for the ancient traits in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AncientTrait {
     name: String,
     text: String,
 }
 
+/// Subresource for the market infos in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Market {
     url: String,
@@ -66,6 +69,7 @@ pub struct Market {
     prices: CardmarketPrices,
 }
 
+/// Subresource for the cardmarket prices in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CardmarketPrices {
     #[serde(rename = "averageSellPrice")]
@@ -100,12 +104,14 @@ pub struct CardmarketPrices {
     reverse_holo_avg30: Option<f32>,
 }
 
+/// Subresource for the images of cards in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Image {
     pub small: String,
     pub large: String,
 }
 
+/// Subresource for the for tcg player data in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Tcgplayer {
     url: String,
@@ -114,6 +120,7 @@ pub struct Tcgplayer {
     prices: Option<TcgplayerPrices>,
 }
 
+/// Subresource for the tcg player price list in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TcgplayerPrices {
     normal: Option<TcgplayerPrice>,
@@ -124,6 +131,7 @@ pub struct TcgplayerPrices {
     first_edition_normal: Option<TcgplayerPrice>,
 }
 
+/// Subresource for the tcg player prices in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TcgplayerPrice {
     low: f32,
@@ -133,6 +141,7 @@ pub struct TcgplayerPrice {
     direct_low: Option<f32>,
 }
 
+/// Subresource for the attacks in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Attack {
     name: String,
@@ -143,6 +152,7 @@ pub struct Attack {
     text: String,
 }
 
+/// Subresource for the abilities in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Ability {
     name: String,
