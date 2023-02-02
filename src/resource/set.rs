@@ -4,21 +4,22 @@ use crate::pokemon_api_client::api_client::{ApiResource, API_URL};
 
 use super::common::Legalities;
 
+/// `ApiResource` for sets.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Set {
-    id: String,
-    name: String,
-    series: String,
+    pub id: String,
+    pub name: String,
+    pub series: String,
     #[serde(rename = "printedTotal")]
-    printed_total: u32,
-    total: u32,
-    legalities: Legalities,
+    pub printed_total: u32,
+    pub total: u32,
+    pub legalities: Legalities,
     #[serde(rename = "ptcgoCode")]
-    ptcgo_code: Option<String>,
+    pub ptcgo_code: Option<String>,
     #[serde(rename = "releaseDate")]
-    release_date: String,
+    pub release_date: String,
     #[serde(rename = "updatedAt")]
-    updated_at: String,
+    pub updated_at: String,
 }
 
 impl ApiResource for Set {

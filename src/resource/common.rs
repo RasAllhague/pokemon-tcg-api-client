@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+/// Subresource for the legalities in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Legalities {
     standard: Option<String>,
@@ -7,12 +8,14 @@ pub struct Legalities {
     expanded: Option<String>,
 }
 
+/// Subresource for the Images in the api.
 #[derive(Serialize, Deserialize)]
 pub struct Images {
     symbol: String,
     logo: String,
 }
 
+/// Subresource for the weaknesses in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Weakness {
     #[serde(rename = "type")]
@@ -20,6 +23,7 @@ pub struct Weakness {
     value: String,
 }
 
+/// Subresource for the resistances in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Resistance {
     #[serde(rename = "type")]
@@ -27,6 +31,7 @@ pub struct Resistance {
     value: String,
 }
 
+/// Subresource for the pokemon types in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub enum PokemonType {
     Colorless,
@@ -42,6 +47,7 @@ pub enum PokemonType {
     Fairy,
 }
 
+/// Subresource for the supertypes in the api.
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Supertype {
     Energy,
