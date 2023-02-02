@@ -5,7 +5,8 @@ use pokemon_tcg_api_client::{
     pokemon_api_client::{
         api_client::{CardId, PokemonApiClient, API_URL},
         error::ApiError,
-    }, resource::ApiResource,
+    },
+    resource::ApiResource,
 };
 use serde::Deserialize;
 

@@ -1,4 +1,4 @@
-use std::{fmt, error::Error};
+use std::{error::Error, fmt};
 
 /// Error for the uniting the different errors.
 #[derive(Debug)]

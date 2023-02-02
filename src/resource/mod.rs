@@ -4,7 +4,6 @@ pub mod card;
 pub mod common;
 pub mod set;
 
-
 /// Trait for using the api client.
 pub trait ApiResource {
     fn url() -> String;

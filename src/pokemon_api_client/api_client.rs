@@ -19,7 +19,6 @@ pub struct PokemonApiClient {
     client: Client,
 }
 
-
 /// Container for api responses. Contains data of the generic type T.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ApiResponse<T> {
@@ -67,8 +66,7 @@ impl PokemonApiClient {
             .await?;
 
         let json = res.text().await?;
-        let api_response: ApiResponse<T> =
-            serde_json::from_str(&json)?;
+        let api_response: ApiResponse<T> = serde_json::from_str(&json)?;
 
         Ok(api_response.data)
     }
@@ -101,8 +99,7 @@ impl PokemonApiClient {
             .await?;
 
         let json = res.text().await?;
-        let api_response: ApiResponse<T> =
-            serde_json::from_str(&json)?;
+        let api_response: ApiResponse<T> = serde_json::from_str(&json)?;
 
         Ok(api_response.data)
     }

@@ -15,9 +15,9 @@ pub struct PokemonQueryBuilder {
 
 impl PokemonQueryBuilder {
     /// Sets the page size of the query builder.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `size` - The size of the page.
     #[must_use]
     pub fn with_page_size(mut self, size: u8) -> Self {
@@ -26,9 +26,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Sets the page from which it should get the results.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `page` - The number of the page to select.
     #[must_use]
     pub fn with_page(mut self, page: u32) -> Self {
@@ -36,10 +36,10 @@ impl PokemonQueryBuilder {
         self
     }
 
-    /// Adds a parameter to the ordering list. 
-    /// 
+    /// Adds a parameter to the ordering list.
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `ordering` - A fields to order by in the data.
     #[must_use]
     pub fn add_ordering(mut self, ordering: Ordering) -> Self {
@@ -47,11 +47,11 @@ impl PokemonQueryBuilder {
         self
     }
 
-    /// Adds a value to select from the requested data. 
+    /// Adds a value to select from the requested data.
     /// The returned data will only contain values with those fields.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `field` - A field to at to the query.
     #[must_use]
     pub fn add_select(mut self, field: &str) -> Self {
@@ -60,9 +60,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Adds a id to the query parameter, if used more than once it turns into an OR.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `id` - The id of the pokemon card you want to filter for.
     #[must_use]
     pub fn add_id(self, id: &CardId) -> Self {
@@ -70,9 +70,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Adds a card name to the query parameter, if used more than once it turns into an OR.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `name` - The name of the pokemon card you want to filter for.
     #[must_use]
     pub fn add_name(self, name: &str) -> Self {
@@ -80,9 +80,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Adds a sub type to the query parameter, if used more than once it turns into an OR.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `sub_types` - The sub type you want to query for.
     #[must_use]
     pub fn add_sub_types(self, sub_type: &str) -> Self {
@@ -90,9 +90,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Adds a hp range to the query parameter. Can be inclusive or exclusive.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `low_value` - The low value of the hp range.
     /// * `high_value` - The high value of the hp range.
     /// * `is_inclusive` - Sets whether the range is inclusive.
@@ -106,9 +106,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Adds a type to the query parameter.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `types` - The type of to add to the query.
     #[must_use]
     pub fn add_types(self, types: &str) -> Self {
@@ -116,9 +116,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Adds a pokemon name the searched pokemon evolves from to the query parameter.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `evolves_from` - The evolved from pokemon to add to the query.
     #[must_use]
     pub fn add_evolves_from(self, evolves_from: &str) -> Self {
@@ -126,9 +126,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Adds a pokemon name the searched pokemon evolves tp to the query parameter.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `evolves_to` - The evolved to pokemon to add to the query.
     #[must_use]
     pub fn add_evolves_to(self, evolves_to: &str) -> Self {
@@ -136,9 +136,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Adds a attack cost range to the query parameter. Can be inclusive or exclusive.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `low_value` - The low value of the attack range.
     /// * `high_value` - The high value of the attack range.
     /// * `is_inclusive` - Sets whether the range is inclusive.
@@ -164,9 +164,9 @@ impl PokemonQueryBuilder {
 
     /// Adds a set series to the query parameter, if used more than once it turns into an OR.
     /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `set_series` - The name of set series of the card you want to query for.
     #[must_use]
     pub fn add_set_name(self, set_name: &str) -> Self {
@@ -174,9 +174,9 @@ impl PokemonQueryBuilder {
     }
 
     /// Adds a rarity to the query.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `rarity` - The rarity of the pokemon card.
     #[must_use]
     pub fn add_rarity(self, rarity: &str) -> Self {

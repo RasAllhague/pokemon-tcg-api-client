@@ -29,7 +29,7 @@ pub trait QueryBuilder {
     fn select_fields(&self) -> Vec<String>;
 
     /// Builds and returns the query url for the api request.
-    /// 
+    ///
     /// * `url` - The base url of the query url.
     fn build(&self, url: &str) -> String {
         let url = url;

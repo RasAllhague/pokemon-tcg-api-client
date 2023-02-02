@@ -15,9 +15,9 @@ pub struct SetQueryBuilder {
 
 impl SetQueryBuilder {
     /// Sets the page size of the query builder.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `size` - The size of the page.
     #[must_use]
     pub fn with_page_size(mut self, size: u8) -> Self {
@@ -26,9 +26,9 @@ impl SetQueryBuilder {
     }
 
     /// Sets the page from which it should get the results.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `page` - The number of the page to select.
     #[must_use]
     pub fn with_page(mut self, page: u32) -> Self {
@@ -36,10 +36,10 @@ impl SetQueryBuilder {
         self
     }
 
-    /// Adds a parameter to the ordering list. 
-    /// 
+    /// Adds a parameter to the ordering list.
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `ordering` - A fields to order by in the data.
     #[must_use]
     pub fn add_ordering(mut self, ordering: Ordering) -> Self {
@@ -47,11 +47,11 @@ impl SetQueryBuilder {
         self
     }
 
-    /// Adds a value to select from the requested data. 
+    /// Adds a value to select from the requested data.
     /// The returned data will only contain values with those fields.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `field` - A field to at to the query.
     #[must_use]
     pub fn add_select(mut self, field: &str) -> Self {
@@ -60,9 +60,9 @@ impl SetQueryBuilder {
     }
 
     /// Adds a id to the query parameter, if used more than once it turns into an OR.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `id` - The id of the set you want to filter for.
     #[must_use]
     pub fn add_id(self, id: &SetId) -> Self {
@@ -71,9 +71,9 @@ impl SetQueryBuilder {
 
     /// Adds a set name to the query parameter, if used more than once it turns into an OR.
     /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `name` - The name of the set or the wildcard name you want to query for.
     #[must_use]
     pub fn add_name(self, name: &str) -> Self {
@@ -82,9 +82,9 @@ impl SetQueryBuilder {
 
     /// Adds a sub series to the query parameter, if used more than once it turns into an OR.
     /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `series` - The name of the sub series or the wildcard name you want to query for.
     #[must_use]
     pub fn add_sub_series(self, series: &str) -> Self {
@@ -93,9 +93,9 @@ impl SetQueryBuilder {
 
     /// Adds a ptcgo code to the query parameter, if used more than once it turns into an OR.
     /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `series` - The ptcgo code you want to query for.
     #[must_use]
     pub fn add_ptcgo_code(self, ptcgo_code: &str) -> Self {
