@@ -49,11 +49,11 @@ impl PokemonApiClient {
             .header(API_KEY_HEADER, &self.api_key)
             .send()
             .await
-            .map_err(|err| ApiError::Reqwest(err))?;
+            .map_err(ApiError::Reqwest)?;
 
-        let json = res.text().await.map_err(|err| ApiError::Reqwest(err))?;
+        let json = res.text().await.map_err(ApiError::Reqwest)?;
         let api_response: ApiResponse<T> =
-            serde_json::from_str(&json).map_err(|err| ApiError::Deserialize(err))?;
+            serde_json::from_str(&json).map_err( ApiError::Deserialize)?;
 
         Ok(api_response.data)
     }
@@ -75,11 +75,11 @@ impl PokemonApiClient {
             .header(API_KEY_HEADER, &self.api_key)
             .send()
             .await
-            .map_err(|err| ApiError::Reqwest(err))?;
+            .map_err(ApiError::Reqwest)?;
 
-        let json = res.text().await.map_err(|err| ApiError::Reqwest(err))?;
+        let json = res.text().await.map_err(ApiError::Reqwest)?;
         let api_response: ApiResponse<T> =
-            serde_json::from_str(&json).map_err(|err| ApiError::Deserialize(err))?;
+            serde_json::from_str(&json).map_err(ApiError::Deserialize)?;
 
         Ok(api_response.data)
     }
@@ -87,16 +87,16 @@ impl PokemonApiClient {
     pub async fn download_image(&self, url: &str, destination: &str) -> Result<(), ApiError> {
         let response = reqwest::get(url)
             .await
-            .map_err(|err| ApiError::Reqwest(err))?;
+            .map_err(ApiError::Reqwest)?;
 
-        let mut file = File::create(destination).map_err(|err| ApiError::Io(err))?;
+        let mut file = File::create(destination).map_err(ApiError::Io)?;
         let mut content = Cursor::new(
             response
                 .bytes()
                 .await
-                .map_err(|err| ApiError::Reqwest(err))?,
+                .map_err(ApiError::Reqwest)?,
         );
-        std::io::copy(&mut content, &mut file).map_err(|err| ApiError::Io(err))?;
+        std::io::copy(&mut content, &mut file).map_err(ApiError::Io)?;
 
         Ok(())
     }

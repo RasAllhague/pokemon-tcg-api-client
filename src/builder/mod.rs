@@ -33,13 +33,13 @@ pub trait QueryBuilder {
 
         let order_by = self.order_by();
 
-        if order_by.len() != 0 {
+        if !order_by.is_empty() {
             todo!()
         }
 
         let fields = self.select_fields();
 
-        if fields.len() != 0 {
+        if !fields.is_empty() {
             let select_query = fields
                 .iter()
                 .map(|x| format!("{},", x))
@@ -53,7 +53,7 @@ pub trait QueryBuilder {
 
         let filters = self.filters();
 
-        if filters.len() != 0 {
+        if !filters.is_empty() {
             builder += match query_index {
                 Some(_) => "&",
                 None => "?",
@@ -81,11 +81,11 @@ fn build_filter_query(
 
         let split = filter_value.split(',').collect::<Vec<&str>>();
 
-        if split.len() > 0 {
+        if !split.is_empty() {
             for sub_split in split.iter() {
-                *builder += &urlencoding::encode(&filter_key);
+                *builder += &urlencoding::encode(filter_key);
                 *builder += ":";
-                *builder += &urlencoding::encode(&enclose_whitespace_strings(&sub_split));
+                *builder += &urlencoding::encode(&enclose_whitespace_strings(sub_split));
 
                 if let Some(last) = split.last() {
                     if sub_split != last {
@@ -94,9 +94,9 @@ fn build_filter_query(
                 }
             }
         } else {
-            *builder += &urlencoding::encode(&filter_key);
+            *builder += &urlencoding::encode(filter_key);
             *builder += ":";
-            *builder += &urlencoding::encode(&enclose_whitespace_strings(&filter_value));
+            *builder += &urlencoding::encode(&enclose_whitespace_strings(filter_value));
         }
 
         query_index = Some(0)
@@ -124,5 +124,5 @@ fn enclose_whitespace_strings(value: &str) -> String {
         return format!("\"{}\"", value);
     }
 
-    return value.to_string();
+    value.to_string()
 }
