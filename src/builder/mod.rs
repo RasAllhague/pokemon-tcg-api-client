@@ -42,7 +42,7 @@ pub trait QueryBuilder {
         if !fields.is_empty() {
             let select_query = fields
                 .iter()
-                .map(|x| format!("{},", x))
+                .map(|x| format!("{x},"))
                 .collect::<Vec<String>>()
                 .concat()
                 .trim_end_matches(',')
@@ -81,25 +81,25 @@ fn build_filter_query(
 
         let split = filter_value.split(',').collect::<Vec<&str>>();
 
-        if !split.is_empty() {
-            for sub_split in split.iter() {
-                *builder += &urlencoding::encode(filter_key);
-                *builder += ":";
-                *builder += &urlencoding::encode(&enclose_whitespace_strings(sub_split));
-
-                if let Some(last) = split.last() {
-                    if sub_split != last {
-                        *builder += &urlencoding::encode(" or ");
-                    }
-                }
-            }
-        } else {
+        if split.is_empty() {
             *builder += &urlencoding::encode(filter_key);
             *builder += ":";
-            *builder += &urlencoding::encode(&enclose_whitespace_strings(filter_value));
+            *builder += &urlencoding::encode(&enclose_whitespace_strings(filter_value)); 
         }
 
-        query_index = Some(0)
+        for sub_split in &split {
+            *builder += &urlencoding::encode(filter_key);
+            *builder += ":";
+            *builder += &urlencoding::encode(&enclose_whitespace_strings(sub_split));
+
+            if let Some(last) = split.last() {
+                if sub_split != last {
+                    *builder += &urlencoding::encode(" or ");
+                }
+            }
+        }
+
+        query_index = Some(0);
     }
 }
 
@@ -120,8 +120,8 @@ fn build_query_param<T: Display>(
 }
 
 fn enclose_whitespace_strings(value: &str) -> String {
-    if value.chars().any(|x| x.is_whitespace()) {
-        return format!("\"{}\"", value);
+    if value.chars().any(char::is_whitespace) {
+        return format!("\"{value}\"");
     }
 
     value.to_string()

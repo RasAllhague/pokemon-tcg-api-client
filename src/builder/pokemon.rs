@@ -33,7 +33,7 @@ impl PokemonQueryBuilder {
         self
     }
 
-    pub fn add_id(self, id: CardId) -> Self {
+    pub fn add_id(self, id: &CardId) -> Self {
         self.add_or_update_filter("id", &id.0)
     }
 
@@ -47,10 +47,10 @@ impl PokemonQueryBuilder {
 
     pub fn add_hp_range(self, low_value: &str, high_value: &str, is_inclusive: bool) -> Self {
         if is_inclusive {
-            return self.add_or_update_filter("hp", &format!("[{} TO {}]", low_value, high_value));
+            return self.add_or_update_filter("hp", &format!("[{low_value} TO {high_value}]"));
         }
 
-        self.add_or_update_filter("hp", &format!("{{{} TO {}}}", low_value, high_value))
+        self.add_or_update_filter("hp", &format!("{{{low_value} TO {high_value}}}"))
     }
 
     pub fn add_types(self, types: &str) -> Self {
@@ -74,13 +74,13 @@ impl PokemonQueryBuilder {
         if is_inclusive {
             return self.add_or_update_filter(
                 "attacks.convertedEnergyCost",
-                &format!("[{} TO {}]", low_value, high_value),
+                &format!("[{low_value} TO {high_value}]"),
             );
         }
 
         self.add_or_update_filter(
             "attacks.convertedEnergyCost",
-            &format!("{{{} TO {}}}", low_value, high_value),
+            &format!("{{{low_value} TO {high_value}}}"),
         )
     }
 
@@ -94,7 +94,7 @@ impl PokemonQueryBuilder {
 
     fn add_or_update_filter(mut self, key: &str, value: &str) -> Self {
         if let Some(old_value) = self.filters.get_mut(key) {
-            *old_value = format!("{},{}", old_value, value);
+            *old_value = format!("{old_value},{value}");
             return self;
         }
 

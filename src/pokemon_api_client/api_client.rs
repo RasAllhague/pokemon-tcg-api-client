@@ -42,6 +42,7 @@ impl PokemonApiClient {
     /// # Arguments
     /// 
     /// * `api_key` - The to the pokemon tcg api.
+    #[must_use]
     pub fn new(api_key: &str) -> Self {
         PokemonApiClient {
             api_key: api_key.to_owned(),

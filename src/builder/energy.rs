@@ -33,7 +33,7 @@ impl EnergyQueryBuilder {
         self
     }
 
-    pub fn add_id(self, id: CardId) -> Self {
+    pub fn add_id(self, id: &CardId) -> Self {
         self.add_or_update_filter("id", &id.0)
     }
 
@@ -55,7 +55,7 @@ impl EnergyQueryBuilder {
 
     fn add_or_update_filter(mut self, key: &str, value: &str) -> Self {
         if let Some(old_value) = self.filters.get_mut(key) {
-            *old_value = format!("{},{}", old_value, value);
+            *old_value = format!("{old_value},{value}");
             return self;
         }
 
