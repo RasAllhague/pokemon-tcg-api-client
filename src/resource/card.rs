@@ -41,14 +41,14 @@ pub struct Card {
     pub legalities: Legalities,
     #[serde(rename = "regulationsMark")]
     pub regulations_mark: Option<String>,
-    pub images: CardImage,
+    pub images: Image,
     pub tcgplayer: Option<Tcgplayer>,
-    pub cardmarket: Option<CardMarket>,
+    pub cardmarket: Option<Market>,
 }
 
 impl ApiResource for Card {
     fn url() -> String {
-        format!("{}/cards", API_URL)
+        format!("{API_URL}/cards")
     }
 }
 
@@ -59,7 +59,7 @@ pub struct AncientTrait {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct CardMarket {
+pub struct Market {
     url: String,
     #[serde(rename = "updatedAt")]
     updated_at: String,
@@ -101,7 +101,7 @@ pub struct CardmarketPrices {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct CardImage {
+pub struct Image {
     pub small: String,
     pub large: String,
 }

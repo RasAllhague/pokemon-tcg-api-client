@@ -23,6 +23,6 @@ pub struct Set {
 
 impl ApiResource for Set {
     fn url() -> String {
-        format!("{}/sets", API_URL)
+        format!("{API_URL}/sets")
     }
 }
