@@ -1,9 +1,12 @@
 use std::{fs::File, io::Cursor};
 
 use reqwest::Client;
-use serde::{Serialize, Deserialize, de::DeserializeOwned};
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 
-use crate::{resource::{card::Card, set::Set}, builder::QueryBuilder};
+use crate::{
+    builder::QueryBuilder,
+    resource::{card::Card, set::Set},
+};
 
 use super::error::ApiError;
 
@@ -36,8 +39,12 @@ impl PokemonApiClient {
         }
     }
 
-    pub async fn get_resource<'a, T>(&self, resource_path: &str) -> Result<T, ApiError> where T: DeserializeOwned {
-        let res = self.client
+    pub async fn get_resource<'a, T>(&self, resource_path: &str) -> Result<T, ApiError>
+    where
+        T: DeserializeOwned,
+    {
+        let res = self
+            .client
             .get(resource_path)
             .header(API_KEY_HEADER, &self.api_key)
             .send()
@@ -45,17 +52,25 @@ impl PokemonApiClient {
             .map_err(|err| ApiError::Reqwest(err))?;
 
         let json = res.text().await.map_err(|err| ApiError::Reqwest(err))?;
-        let api_response: ApiResponse<T> = serde_json::from_str(&json)
-            .map_err(|err| ApiError::Deserialize(err))?;
+        let api_response: ApiResponse<T> =
+            serde_json::from_str(&json).map_err(|err| ApiError::Deserialize(err))?;
 
         Ok(api_response.data)
     }
 
-    pub async fn get_queryable_resources<'a, T, Q>(&self, query_builder: &dyn Fn(Q) -> Q) -> Result<T, ApiError> where T: DeserializeOwned + ApiResource, Q: QueryBuilder {
+    pub async fn get_queryable_resources<'a, T, Q>(
+        &self,
+        query_builder: &dyn Fn(Q) -> Q,
+    ) -> Result<T, ApiError>
+    where
+        T: DeserializeOwned + ApiResource,
+        Q: QueryBuilder,
+    {
         let builder = Q::new();
         let query_url = query_builder(builder).build(&T::url());
 
-        let res = self.client
+        let res = self
+            .client
             .get(query_url)
             .header(API_KEY_HEADER, &self.api_key)
             .send()
@@ -63,17 +78,24 @@ impl PokemonApiClient {
             .map_err(|err| ApiError::Reqwest(err))?;
 
         let json = res.text().await.map_err(|err| ApiError::Reqwest(err))?;
-        let api_response: ApiResponse<T> = serde_json::from_str(&json)
-            .map_err(|err| ApiError::Deserialize(err))?;
+        let api_response: ApiResponse<T> =
+            serde_json::from_str(&json).map_err(|err| ApiError::Deserialize(err))?;
 
         Ok(api_response.data)
     }
 
     pub async fn download_image(&self, url: &str, destination: &str) -> Result<(), ApiError> {
-        let response = reqwest::get(url).await.map_err(|err| ApiError::Reqwest(err))?;
+        let response = reqwest::get(url)
+            .await
+            .map_err(|err| ApiError::Reqwest(err))?;
 
         let mut file = File::create(destination).map_err(|err| ApiError::Io(err))?;
-        let mut content =  Cursor::new(response.bytes().await.map_err(|err| ApiError::Reqwest(err))?);
+        let mut content = Cursor::new(
+            response
+                .bytes()
+                .await
+                .map_err(|err| ApiError::Reqwest(err))?,
+        );
         std::io::copy(&mut content, &mut file).map_err(|err| ApiError::Io(err))?;
 
         Ok(())

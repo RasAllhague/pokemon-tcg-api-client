@@ -1,5 +1,4 @@
-use serde::{Serialize, Deserialize};
-
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Legalities {
@@ -18,14 +17,14 @@ pub struct Images {
 pub struct Weakness {
     #[serde(rename = "type")]
     weakness_type: PokemonType,
-    value: String
+    value: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Resistance {
     #[serde(rename = "type")]
     resistance_type: PokemonType,
-    value: String
+    value: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

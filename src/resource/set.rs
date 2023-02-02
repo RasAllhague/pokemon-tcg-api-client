@@ -1,9 +1,8 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-use crate::pokemon_api_client::api_client::{API_URL, ApiResource};
+use crate::pokemon_api_client::api_client::{ApiResource, API_URL};
 
 use super::common::Legalities;
-
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Set {

@@ -4,7 +4,7 @@ use crate::pokemon_api_client::api_client::CardId;
 
 use super::{Ordering, QueryBuilder};
 
-pub struct PokemonQueryBuilder {
+pub struct EnergyQueryBuilder {
     filters: HashMap<String, String>,
     page: Option<u32>,
     page_size: Option<u8>,
@@ -12,7 +12,7 @@ pub struct PokemonQueryBuilder {
     select_fields: Vec<String>,
 }
 
-impl PokemonQueryBuilder {
+impl EnergyQueryBuilder {
     pub fn with_page_size(mut self, size: u8) -> Self {
         self.page_size = Some(size);
         self
@@ -45,51 +45,12 @@ impl PokemonQueryBuilder {
         self.add_or_update_filter("subtypes", sub_type)
     }
 
-    pub fn add_hp_range(self, low_value: &str, high_value: &str, is_inclusive: bool) -> Self {
-        if is_inclusive {
-            return self.add_or_update_filter("hp", &format!("[{} TO {}]", low_value, high_value));
-        }
-
-        self.add_or_update_filter("hp", &format!("{{{} TO {}}}", low_value, high_value))
+    pub fn add_sub_name(self, sub_type: &str) -> Self {
+        self.add_or_update_filter("set.name", sub_type)
     }
 
-    pub fn add_types(self, types: &str) -> Self {
-        self.add_or_update_filter("types", types)
-    }
-
-    pub fn add_evolves_from(self, evolves_from: &str) -> Self {
-        self.add_or_update_filter("evolvesFrom", evolves_from)
-    }
-
-    pub fn add_evolves_to(self, evolves_to: &str) -> Self {
-        self.add_or_update_filter("evolvesTo", evolves_to)
-    }
-
-    pub fn add_attack_cost_range(
-        self,
-        low_value: &str,
-        high_value: &str,
-        is_inclusive: bool,
-    ) -> Self {
-        if is_inclusive {
-            return self.add_or_update_filter(
-                "attacks.convertedEnergyCost",
-                &format!("[{} TO {}]", low_value, high_value),
-            );
-        }
-
-        self.add_or_update_filter(
-            "attacks.convertedEnergyCost",
-            &format!("{{{} TO {}}}", low_value, high_value),
-        )
-    }
-
-    pub fn add_set_name(self, set_name: &str) -> Self {
-        self.add_or_update_filter("set.series", set_name)
-    }
-
-    pub fn add_rarity(self, rarity: &str) -> Self {
-        self.add_or_update_filter("rarity", rarity)
+    pub fn add_sub_series(self, sub_type: &str) -> Self {
+        self.add_or_update_filter("ser.series", sub_type)
     }
 
     fn add_or_update_filter(mut self, key: &str, value: &str) -> Self {
@@ -103,9 +64,9 @@ impl PokemonQueryBuilder {
     }
 }
 
-impl QueryBuilder for PokemonQueryBuilder {
+impl QueryBuilder for EnergyQueryBuilder {
     fn new() -> Self {
-        PokemonQueryBuilder {
+        EnergyQueryBuilder {
             filters: HashMap::new(),
             page: None,
             page_size: None,

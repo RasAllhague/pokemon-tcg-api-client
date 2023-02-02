@@ -1,8 +1,11 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 use crate::pokemon_api_client::api_client::{ApiResource, API_URL};
 
-use super::{common::{PokemonType, Weakness, Resistance, Legalities}, set::Set};
+use super::{
+    common::{Legalities, PokemonType, Resistance, Weakness},
+    set::Set,
+};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Card {
@@ -153,4 +156,3 @@ pub struct Ability {
     #[serde(rename = "type")]
     ability_type: String,
 }
-
