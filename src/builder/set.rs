@@ -70,7 +70,7 @@ impl SetQueryBuilder {
     }
 
     /// Adds a set name to the query parameter, if used more than once it turns into an OR.
-    /// Look at [Pokemon TCG Api wiki] (https://docs.pokemontcg.io/api-reference/cards/search-cards/) for a documentation about wildcards.
+    /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
     /// 
     /// # Arguments
     /// 
@@ -81,7 +81,7 @@ impl SetQueryBuilder {
     }
 
     /// Adds a sub series to the query parameter, if used more than once it turns into an OR.
-    /// Look at [Pokemon TCG Api wiki] (https://docs.pokemontcg.io/api-reference/cards/search-cards/) for a documentation about wildcards.
+    /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
     /// 
     /// # Arguments
     /// 
@@ -92,7 +92,7 @@ impl SetQueryBuilder {
     }
 
     /// Adds a ptcgo code to the query parameter, if used more than once it turns into an OR.
-    /// Look at [Pokemon TCG Api wiki] (https://docs.pokemontcg.io/api-reference/cards/search-cards/) for a documentation about wildcards.
+    /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
     /// 
     /// # Arguments
     /// 

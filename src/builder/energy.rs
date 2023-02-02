@@ -70,7 +70,7 @@ impl EnergyQueryBuilder {
     }
 
     /// Adds a card name to the query parameter, if used more than once it turns into an OR.
-    /// Look at [Pokemon TCG Api wiki] (https://docs.pokemontcg.io/api-reference/cards/search-cards/) for a documentation about wildcards.
+    /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
     /// 
     /// # Arguments
     /// 
@@ -81,7 +81,7 @@ impl EnergyQueryBuilder {
     }
 
     /// Adds a sub type to the query parameter, if used more than once it turns into an OR.
-    /// Look at [Pokemon TCG Api wiki] (https://docs.pokemontcg.io/api-reference/cards/search-cards/) for a documentation about wildcards.
+    /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
     /// 
     /// # Arguments
     /// 
@@ -92,7 +92,7 @@ impl EnergyQueryBuilder {
     }
 
     /// Adds a set name to the query parameter, if used more than once it turns into an OR.
-    /// Look at [Pokemon TCG Api wiki] (https://docs.pokemontcg.io/api-reference/cards/search-cards/) for a documentation about wildcards.
+    /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
     /// 
     /// # Arguments
     /// 
@@ -103,7 +103,7 @@ impl EnergyQueryBuilder {
     }
 
     /// Adds a set series to the query parameter, if used more than once it turns into an OR.
-    /// Look at [Pokemon TCG Api wiki] (https://docs.pokemontcg.io/api-reference/cards/search-cards/) for a documentation about wildcards.
+    /// Look at Pokemon TCG Api wiki <https://docs.pokemontcg.io/api-reference/cards/search-cards/> for a documentation about wildcards.
     /// 
     /// # Arguments
     /// 
