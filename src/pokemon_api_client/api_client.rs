@@ -5,7 +5,7 @@ use serde::{de::DeserializeOwned, Deserialize, Serialize};
 
 use crate::{
     builder::QueryBuilder,
-    resource::{card::Card, set::Set},
+    resource::{card::Card, set::Set, ApiResource},
 };
 
 use super::error::ApiError;
@@ -19,10 +19,6 @@ pub struct PokemonApiClient {
     client: Client,
 }
 
-/// Trait for using the api client.
-pub trait ApiResource {
-    fn url() -> String;
-}
 
 /// Container for api responses. Contains data of the generic type T.
 #[derive(Serialize, Deserialize, Debug)]

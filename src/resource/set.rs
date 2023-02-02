@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 
-use crate::pokemon_api_client::api_client::{ApiResource, API_URL};
+use crate::pokemon_api_client::api_client::API_URL;
 
-use super::common::Legalities;
+use super::{common::Legalities, ApiResource};
 
 /// `ApiResource` for sets.
 #[derive(Serialize, Deserialize, Debug)]

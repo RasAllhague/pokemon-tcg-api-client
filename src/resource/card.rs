@@ -1,10 +1,10 @@
 use serde::{Deserialize, Serialize};
 
-use crate::pokemon_api_client::api_client::{ApiResource, API_URL};
+use crate::pokemon_api_client::api_client::API_URL;
 
 use super::{
     common::{Legalities, PokemonType, Resistance, Weakness},
-    set::Set,
+    set::Set, ApiResource,
 };
 
 /// Subresource for cards in the api.

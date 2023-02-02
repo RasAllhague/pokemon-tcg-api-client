@@ -3,9 +3,9 @@ use std::env;
 use pokemon_tcg_api_client::{
     builder::pokemon::PokemonQueryBuilder,
     pokemon_api_client::{
-        api_client::{ApiResource, CardId, PokemonApiClient, API_URL},
+        api_client::{CardId, PokemonApiClient, API_URL},
         error::ApiError,
-    },
+    }, resource::ApiResource,
 };
 use serde::Deserialize;
 

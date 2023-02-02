@@ -1,3 +1,4 @@
+//! Contains the implementation for the query builders used for advanced querying to the api.
 pub mod energy;
 pub mod pokemon;
 pub mod set;
