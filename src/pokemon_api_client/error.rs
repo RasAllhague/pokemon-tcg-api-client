@@ -26,7 +26,7 @@ impl Error for ApiError {
             ApiError::Reqwest(err) => Some(err),
             ApiError::Deserialize(err) => Some(err),
             ApiError::Io(err) => Some(err),
-            ApiError::General(s) => None,
+            ApiError::General(_) => None,
         }
     }
 }
