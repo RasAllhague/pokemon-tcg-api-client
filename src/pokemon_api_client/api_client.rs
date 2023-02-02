@@ -27,9 +27,9 @@ pub struct ApiResponse<T> {
     data: T,
 }
 
-pub struct CardId<'a>(pub &'a str);
+pub struct CardId(pub String);
 
-pub struct SetId<'a>(pub &'a str);
+pub struct SetId(pub String);
 
 impl PokemonApiClient {
     pub fn new(api_key: &str) -> Self {
@@ -101,7 +101,7 @@ impl PokemonApiClient {
         Ok(())
     }
 
-    pub async fn get_card(&self, id: CardId<'static>) -> Result<Card, ApiError> {
+    pub async fn get_card(&self, id: CardId) -> Result<Card, ApiError> {
         let card_url = format!("{}/cards/{}", API_URL, id.0);
 
         self.get_resource(&card_url).await
@@ -113,7 +113,7 @@ impl PokemonApiClient {
         self.get_resource(&cards_url).await
     }
 
-    pub async fn get_set(&self, id: SetId<'static>) -> Result<Vec<Set>, ApiError> {
+    pub async fn get_set(&self, id: SetId) -> Result<Vec<Set>, ApiError> {
         let sets_url = format!("{}/sets/{}", API_URL, id.0);
 
         self.get_resource(&sets_url).await

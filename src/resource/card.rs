@@ -52,12 +52,6 @@ impl ApiResource for Card {
     }
 }
 
-impl ApiResource for Vec<Card> {
-    fn url() -> String {
-        format!("{}/cards", API_URL)
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AncientTrait {
     name: String,

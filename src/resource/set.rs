@@ -26,9 +26,3 @@ impl ApiResource for Set {
         format!("{}/sets", API_URL)
     }
 }
-
-impl ApiResource for Vec<Set> {
-    fn url() -> String {
-        format!("{}/sets", API_URL)
-    }
-}

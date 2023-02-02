@@ -34,7 +34,7 @@ impl TrainerQueryBuilder {
     }
 
     pub fn add_id(self, id: CardId) -> Self {
-        self.add_or_update_filter("id", id.0)
+        self.add_or_update_filter("id", &id.0)
     }
 
     pub fn add_name(self, name: &str) -> Self {
