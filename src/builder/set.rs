@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::pokemon_api_client::api_client::{SetId};
+use crate::pokemon_api_client::api_client::SetId;
 
 use super::{Ordering, QueryBuilder};
 
