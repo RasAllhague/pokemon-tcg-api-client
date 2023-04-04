@@ -1,6 +1,6 @@
 [package]
 name = "pokemon-tcg-api-client"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 description = "A crate for querying a pokemon tcg api."
 repository = "https://github.com/RasAllhague/pokemon-tcg-api-client"
