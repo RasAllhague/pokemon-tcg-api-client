@@ -5,6 +5,7 @@ use crate::pokemon_api_client::api_client::CardId;
 use super::{Ordering, QueryBuilder};
 
 /// Query builder for pokemon card api requests.
+#[derive(Clone)]
 pub struct PokemonQueryBuilder {
     filters: HashMap<String, String>,
     page: Option<u32>,
@@ -20,9 +21,10 @@ impl PokemonQueryBuilder {
     ///
     /// * `size` - The size of the page.
     #[must_use]
-    pub fn with_page_size(mut self, size: u8) -> Self {
-        self.page_size = Some(size);
-        self
+    pub fn with_page_size(self, size: u8) -> Self {
+        let mut new = self.clone();
+        new.page_size = Some(size);
+        new
     }
 
     /// Sets the page from which it should get the results.
@@ -31,9 +33,10 @@ impl PokemonQueryBuilder {
     ///
     /// * `page` - The number of the page to select.
     #[must_use]
-    pub fn with_page(mut self, page: u32) -> Self {
-        self.page = Some(page);
-        self
+    pub fn with_page(self, page: u32) -> Self {
+        let mut new = self.clone();
+        new.page = Some(page);
+        new
     }
 
     /// Adds a parameter to the ordering list.
@@ -42,9 +45,10 @@ impl PokemonQueryBuilder {
     ///
     /// * `ordering` - A fields to order by in the data.
     #[must_use]
-    pub fn add_ordering(mut self, ordering: Ordering) -> Self {
-        self.order_by.push(ordering);
-        self
+    pub fn add_ordering(self, ordering: Ordering) -> Self {
+        let mut new = self.clone();
+        new.order_by.push(ordering);
+        new
     }
 
     /// Adds a value to select from the requested data.
@@ -54,8 +58,9 @@ impl PokemonQueryBuilder {
     ///
     /// * `field` - A field to at to the query.
     #[must_use]
-    pub fn add_select(mut self, field: &str) -> Self {
-        self.select_fields.push(String::from(field));
+    pub fn add_select(self, field: &str) -> Self {
+        let mut new = self.clone();
+        new.select_fields.push(String::from(field));
         self
     }
 

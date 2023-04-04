@@ -80,16 +80,12 @@ impl PokemonApiClient {
     /// # Errors
     ///
     /// Will return `Err` if an error occures during either api querying or json parsing.
-    pub async fn get_queryable_resources<'a, T, Q>(
-        &self,
-        query_builder: &dyn Fn(Q) -> Q,
-    ) -> Result<T, ApiError>
+    pub async fn get_queryable_resources<'a, T, Q>(&self, query_builder: Q) -> Result<T, ApiError>
     where
         T: DeserializeOwned + ApiResource,
         Q: QueryBuilder,
     {
-        let builder = Q::new();
-        let query_url = query_builder(builder).build(&T::url());
+        let query_url = query_builder.build(&T::url());
 
         let res = self
             .client

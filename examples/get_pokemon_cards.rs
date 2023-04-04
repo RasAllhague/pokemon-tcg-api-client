@@ -1,7 +1,7 @@
 use std::env;
 
 use pokemon_tcg_api_client::{
-    builder::pokemon::PokemonQueryBuilder,
+    builder::{pokemon::PokemonQueryBuilder, QueryBuilder},
     pokemon_api_client::{api_client::PokemonApiClient, error::ApiError},
     resource::card::Card,
 };
@@ -13,9 +13,11 @@ async fn main() -> Result<(), ApiError> {
     let api_client = PokemonApiClient::new(&api_token);
 
     let bulbs = api_client
-        .get_queryable_resources::<Vec<Card>, PokemonQueryBuilder>(&|builder| {
-            builder.add_name("bulb*").with_page_size(10)
-        })
+        .get_queryable_resources::<Vec<Card>, PokemonQueryBuilder>(
+            PokemonQueryBuilder::new()
+                .add_name("bulb*")
+                .with_page_size(10),
+        )
         .await?;
 
     for bulb in bulbs {
